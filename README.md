@@ -8,7 +8,7 @@ The set up works by adding additional dependencies to your podfile.
 
 To add an additional plugin, simply add the following to your podfile
 
-```podfile
+```ruby
 target '<PROJECT NAME>' do
   # ...
   pod 'MotionDnaPlugins/<PLUGIN NAME>', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories'
@@ -19,7 +19,7 @@ The `<PLUGIN NAME>` contains the plugin you want to install. You can provide an 
 
 Example: to import the MotionDnaMaps plugin for a MapNavigation project, use
 
-```podfile
+```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.1'
 
