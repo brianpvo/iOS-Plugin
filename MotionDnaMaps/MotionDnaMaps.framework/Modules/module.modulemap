@@ -1,0 +1,10 @@
+framework module MotionDnaMaps {
+  umbrella header "MotionDnaMaps.h"
+
+  export *
+  module * { export * }
+}
+
+module MotionDnaMaps.Swift {
+    header "MotionDnaMaps-Swift.h"
+}
