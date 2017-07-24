@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/MotionDnaMaps-Swift.h</key>
 		<data>
-		Wx2HPiWVz4y+YYmjYI/74h/Yowg=
+		9X0zgp5ip6ItE/SWRcSOCu2lHkk=
 		</data>
 		<key>Headers/MotionDnaMaps.h</key>
 		<data>
@@ -16,13 +16,21 @@
 		<data>
 		sGFAsH1s58SmZYkHMRqss5hIV0w=
 		</data>
+		<key>Modules/MotionDnaMaps.swiftmodule/i386.swiftdoc</key>
+		<data>
+		8wHgKGOV0OLGzDcpeyWQopwIgRQ=
+		</data>
+		<key>Modules/MotionDnaMaps.swiftmodule/i386.swiftmodule</key>
+		<data>
+		UXEzXyaetzmwLUKZudou9p1Wc2c=
+		</data>
 		<key>Modules/MotionDnaMaps.swiftmodule/x86_64.swiftdoc</key>
 		<data>
 		qficyIDBHeIlEiovbPay6Pt0LQw=
 		</data>
 		<key>Modules/MotionDnaMaps.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		HUn5e0+Dr6pNAraA7l0r8z6sD0c=
+		eKdJ5X0/hYh5RVroNDLHJm+7dw4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -247,11 +255,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Wx2HPiWVz4y+YYmjYI/74h/Yowg=
+			9X0zgp5ip6ItE/SWRcSOCu2lHkk=
 			</data>
 			<key>hash2</key>
 			<data>
-			lF1YA9NssWRDf6WMgf9rIAmrzQyZysrVR7Zs4E9Oyzg=
+			S6vl0bOVxGhEnhXy5QZUs7RXRKB+LNWs9i1CF5f3jv4=
 			</data>
 		</dict>
 		<key>Headers/MotionDnaMaps.h</key>
@@ -263,6 +271,28 @@
 			<key>hash2</key>
 			<data>
 			/JMjwxhJeNnmVOQ4shS/nwHTJcpPyq+XvPjFRtMtMcY=
+			</data>
+		</dict>
+		<key>Modules/MotionDnaMaps.swiftmodule/i386.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8wHgKGOV0OLGzDcpeyWQopwIgRQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			WbECAdHbOzS3MbaVwTSzEWBW0aMUIivte//0pFpi8WI=
+			</data>
+		</dict>
+		<key>Modules/MotionDnaMaps.swiftmodule/i386.swiftmodule</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			UXEzXyaetzmwLUKZudou9p1Wc2c=
+			</data>
+			<key>hash2</key>
+			<data>
+			aiiu9s5+PIEJUx0nlKZ1I1NxCmXC8mWgYYUWaUi+R9A=
 			</data>
 		</dict>
 		<key>Modules/MotionDnaMaps.swiftmodule/x86_64.swiftdoc</key>
@@ -280,11 +310,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HUn5e0+Dr6pNAraA7l0r8z6sD0c=
+			eKdJ5X0/hYh5RVroNDLHJm+7dw4=
 			</data>
 			<key>hash2</key>
 			<data>
-			770qhNyzcFmoj/QFrg+DcPl0rdNafh20NNAVM1V142E=
+			4b6g/xXEazYv9XrHZMTUQte1MS9o8sImXEAu4T7+cO4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

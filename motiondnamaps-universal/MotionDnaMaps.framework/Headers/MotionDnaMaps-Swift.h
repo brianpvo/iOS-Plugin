@@ -140,6 +140,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
 @class WKWebViewConfiguration;
 @class NSCoder;
+enum Maps : NSInteger;
 @class UIView;
 @class WKNavigationAction;
 @class WKNavigation;
@@ -150,6 +151,9 @@ SWIFT_CLASS("_TtC13MotionDnaMaps13MotionDnaMaps")
 @interface MotionDnaMaps : WKWebView <WKNavigationDelegate, WKScriptMessageHandler>
 - (nonnull instancetype)initWithFrame:(CGRect)frame configuration:(WKWebViewConfiguration * _Nonnull)configuration SWIFT_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (MotionDnaMaps * _Nonnull)addMap:(enum Maps)map SWIFT_WARN_UNUSED_RESULT;
+- (MotionDnaMaps * _Nonnull)addMap:(enum Maps)map withKey:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
+- (MotionDnaMaps * _Nonnull)addMap:(enum Maps)map withKey:(NSString * _Nonnull)key andMapId:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT;
 - (MotionDnaMaps * _Nonnull)addMapWithUrl:(NSString * _Nonnull)url andJSON:(NSString * _Nonnull)jsonOptions SWIFT_WARN_UNUSED_RESULT;
 - (MotionDnaMaps * _Nonnull)addControls SWIFT_WARN_UNUSED_RESULT;
 - (MotionDnaMaps * _Nonnull)preventRestart SWIFT_WARN_UNUSED_RESULT;
@@ -166,5 +170,48 @@ SWIFT_CLASS("_TtC13MotionDnaMaps13MotionDnaMaps")
 - (void)webView:(WKWebView * _Nonnull)webView didFinishNavigation:(WKNavigation * _Null_unspecified)navigation;
 - (void)userContentController:(WKUserContentController * _Nonnull)userContentController didReceiveScriptMessage:(WKScriptMessage * _Nonnull)message;
 @end
+
+/// Usable map types are:
+/// <ul>
+///     No API key required
+/// <li>{@link #OSM_Mapnik}</li>
+/// <li>{@link #OSM_France}</li>
+/// <br>
+///     API key required, and custom styles available
+/// <li>{@link #Thunderforest}</li>
+/// <li>{@link #Mapbox}</li>
+/// <br>
+///     WIP no key required
+/// <li>{@link #Esri}</li>
+/// </ul>
+/// <ul>
+///   <li>
+///     OSM_Mapnik: <#OSM_Mapnik description#>
+///   </li>
+///   <li>
+///     OSM_France: <#OSM_France description#>
+///   </li>
+///   <li>
+///     Thunderforest: <#Thunderforest description#>
+///   </li>
+///   <li>
+///     Mapbox: <#Mapbox description#>
+///   </li>
+///   <li>
+///     Esri: <#Esri description#>
+///   </li>
+/// </ul>
+typedef SWIFT_ENUM(NSInteger, Maps) {
+/// Open Street Maps, does not require a key, no custom map style
+  MapsOSM_Mapnik = 0,
+/// Open Street Maps, does not require a key, custom map style is France, slighty higher zoom compared to {@link #OSM_Mapnik}
+  MapsOSM_France = 1,
+/// Thunderforest tiling servers, requires a key, default style is ‘outdoors’
+  MapsThunderforest = 2,
+/// Mapbox tiling servers, requires a key, default style is ‘mapbox.streets’
+  MapsMapbox = 3,
+/// Esri tiling servers, not fully implemented yet, current access does not require key, but has missing tiles at high zooms
+  MapsEsri = 4,
+};
 
 #pragma clang diagnostic pop
