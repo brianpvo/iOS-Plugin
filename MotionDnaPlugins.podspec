@@ -38,7 +38,11 @@ s.subspec 'MotionDnaMaps' do |maps|
 end
 
 s.subspec 'MotionDnaMapsUniversal' do |maps|
-  maps.ios.vendored_frameworks = 'motiondnamaps/MotionDnaMaps-universal.framework'
+  maps.ios.vendored_frameworks = 'motiondnamaps-universal/MotionDnaMaps.framework'
+end
+
+s.subspec 'MotionDnaMapsObjc' do |maps|
+  maps.ios.vendored_frameworks = 'motiondnamaps-objc/MotionDnaMaps.framework'
 end
 
 end
