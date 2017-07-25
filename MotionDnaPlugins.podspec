@@ -34,15 +34,7 @@ s.source           = {
 s.ios.deployment_target = '9.1'
 
 s.subspec 'MotionDnaMaps' do |maps|
-  maps.ios.vendored_frameworks = 'MotionDnaMaps/MotionDnaMaps.framework'
-end
-
-s.subspec 'MotionDnaMapsUniversal' do |maps|
-  maps.ios.vendored_frameworks = 'motiondnamaps-universal/MotionDnaMaps.framework'
-end
-
-s.subspec 'MotionDnaMapsObjc' do |maps|
-  maps.ios.vendored_frameworks = 'motiondnamaps-objc/MotionDnaMaps.framework'
+  maps.ios.vendored_frameworks = 'motiondnamaps/MotionDnaMaps.framework'
 end
 
 end
