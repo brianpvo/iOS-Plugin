@@ -97,7 +97,8 @@ Example:
 private var maps: MotionDnaMaps?
 
 // ... loadView
-maps = MotionDnaMaps().addMap(.OSM_Mapnik).addControls()
+maps = MotionDnaMaps()
+maps!.addMap(.OSM_Mapnik).addControls()
 
 // ... viewDidLoad
 if let maps = maps {
