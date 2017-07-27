@@ -10,19 +10,21 @@ To include the plugin in your code, add the following to your podfile
 
 ## Setup
 
-1. Add all permissions necessary for your app. `MotionDnaSDK` requires you to add the following permission to `Info.plist`: `NSLocationWhenInUseUsageDescription`
+1. Disable bitcode by going in your app's `Build Settings`, going down to the `Build Options` section, and setting the `Enable Bitcode` option to `No`
 
-2. Add background mode capabilities in `Capabilities`, set `Background Modes` to "ON", and check the `Location updates` option
+2. Add all permissions necessary for your app. `MotionDnaSDK` requires you to add the following permission to `Info.plist`: `NSLocationWhenInUseUsageDescription`
 
-3. The `MotionDnaMaps` is an extension of the `WKWebView` object. To add it in, go to your storyboard, and create a `Container View`. Position it however you like, and link it to your view controller. We will add the `MotionDnaMaps` in the next part.
+3. Add background mode capabilities in `Capabilities`, set `Background Modes` to "ON", and check the `Location updates` option
 
-4. Go to your view controller, import the `MotionDnaMaps`, and declare a new variable. For this example, we will be using `Swift`
+4. The `MotionDnaMaps` is an extension of the `WKWebView` object. To add it in, go to your storyboard, and create a `Container View`. Position it however you like, and link it to your view controller. We will add the `MotionDnaMaps` in the next part.
+
+5. Go to your view controller, import the `MotionDnaMaps`, and declare a new variable. For this example, we will be using `Swift`
 
 ```swift
   private var maps: MotionDnaMaps?
 ```
 
-5. In `viewDidLoad`, we will create the `MotionDnaMaps` instance, set up any settings, add it to our storyboard, and finally begin running it
+6. In `viewDidLoad`, we will create the `MotionDnaMaps` instance, set up any settings, add it to our storyboard, and finally begin running it
 
 ```swift
   override func viewDidLoad() {
