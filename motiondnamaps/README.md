@@ -111,7 +111,7 @@ Once you have created a `MotionDnaMaps` object, you can use it to call further s
 
 #### `@objc enum Maps`
 
-These are the default tiling servers provided. You may use a custom tiling server instead with the [`addMap(url, andJSON)`](#addmapurl-string-andjson-jsonoptions-string-motiondnamaps) method instead.
+These are the default tiling servers provided. You may use a custom tiling server instead with the [`addMap(url, andJSON)`](#addmapurl-string-andjson-jsonoptions-string---motiondnamaps) method instead.
 
  * `OSM_Mapnik`: Open Street Maps, does not require a key, no custom map style
  * `OSM_France`: Open Street Maps, does not require a key, custom map style is France, slighty higher zoom compared to OSM_Mapnik
@@ -125,7 +125,7 @@ Use this to add a basic map which does not require additional setup fields. Supp
 
 #### `addMap(map: MotionDnaMaps.Maps, withKey: String) -> MotionDnaMaps`
 
-Use this to add a map which requires an access key. Valid maps are `.Thunderforest` and `.Mapbox`. A default styling will be selected. To specify a custom styling, use [`addMap(map, withKey, andMapId)`](#addmapmap-motiondnamapsmaps-withkey-string-andmapid-string-motiondnamaps)
+Use this to add a map which requires an access key. Valid maps are `.Thunderforest` and `.Mapbox`. A default styling will be selected. To specify a custom styling, use [`addMap(map, withKey, andMapId)`](#addmapmap-motiondnamapsmaps-withkey-string-andmapid-string---motiondnamaps)
 
 #### `addMap(map: MotionDnaMaps.Maps, withKey: String, andMapId: String) -> MotionDnaMaps`
 
@@ -147,7 +147,7 @@ addMap(url: "http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey={
 
 For more information, please see documentation with [Leaflet](http://leafletjs.com/reference-1.1.0.html#tilelayer)
 
-#### `MotionDnaMaps addControls()`
+#### `addControls() -> MotionDnaMaps`
 
 Use this to enable the user to control more features on the map. If this method is called, users will be able to do the following:
 
@@ -156,51 +156,51 @@ Use this to enable the user to control more features on the map. If this method 
 * View all data points
 * View stats on their movement (e.g. how long they stood still)
 
-Note that this method will not do anything if you also call [`useLocalOnly()`](#motiondnamaps-uselocalonly).
+Note that this method will not do anything if you also call [`useLocalOnly()`](#uselocalonly---motiondnamaps).
 
-#### `MotionDnaMaps preventRestart()`
+#### `preventRestart() -> MotionDnaMaps`
 
 Use this to prevent the map from running clean-up whenever the app stops and starts again. This will retain all data points from the user's previous instance, along with the map's position, zoom level, etc.
 
-Note: This is a dangerous method to call, as it prevents cleaning up of browser memory. Although all data is compressed, overly using this method can result in the browser reaching it's maximum memory, preventing further tracking of points. It is advised to use this only while within the same application instance, when the current activity needs to be destroyed and recreated again.
+Note: This is a dangerous method to call, as it prevents cleaning up of browser memory. Although all data is compressed, overly using this method can result in the browser reaching it's maximum memory, preventing further tracking of points. It is advised to use this only while within the same application instance, when the storyboard needs to be destroyed and recreated again.
 
-#### `MotionDnaMaps useLocalOnly()`
+#### `useLocalOnly() -> MotionDnaMaps`
 
 This will set navigation to local cartesian coordinates, preventing usage of GPS localization. Furthermore, no default map will be added.
 
-You can use the custom [`addMap(url, json)`](#motiondnamaps-addmapstring-url-string-jsonoptions) with this to set custom map tiles that better reflect local coordinates (for example an open grid or virtual world).
+You can use the custom [`addMap(url, andJSON)`](#addmapurl-string-andjson-jsonoptions-string---motiondnamaps) with this to set custom map tiles that better reflect local coordinates (for example an open grid or virtual world).
 
-Note: the [`addControls()`](#motiondnamaps-addcontrols) will be disabled when local coordinates are enabled, preventing the user from setting a custom location and heading.
+Note: the [`addControls()`](#addcontrols---motiondnamaps) will be disabled when local coordinates are enabled, preventing the user from setting a custom location and heading.
 
-#### `MotionDnaMaps hideMarkers()`
+#### `hideMarkers() -> MotionDnaMaps`
 
 Hides the colored markers, so only a line will appear on the screen, and no stats will be visible (or stored). The arrow will still display the most recent movement types detected.
 
-Will function with [`addConstrols()`](#motiondnamaps-addcontrols), by allowing users to set location as normal, but no longer view marker stats.
+Will function with [`addConstrols()`](#addcontrols---motiondnamaps), by allowing users to set location as normal, but no longer view marker stats.
 
 ## State Changes
 
-The following methods are used to control the state of the maps object, and will return whether they executed successfully. They always will, unless an invalid state is reached (for example trying to call [`resume()`](#boolean-resume) after calling [`stop()`](#void-stop)
+The following methods are used to control the state of the maps object, and will return whether they executed successfully. They always will, unless an invalid state is reached (for example trying to call [`resume()`](#resume) after calling [`stop()`](#stop)
 
-#### `boolean pause()`
+#### `pause()`
 
 Pauses the MotionDna algorithm, which can save battery when not in use, but remembers the user's last location, heading, etc. (as opposed to stopping the algorithm alltogether).
 
-Use [`resume()`](#boolean-pause) to resume the algorithm.
+Use [`resume()`](#pause) to resume the algorithm.
 
-#### `boolean resume()`
+#### `resume()`
 
 Resumes the MotionDna algorithm if it was paused.
 
-#### `boolean save()`
+#### `save()`
 
-Saves the current viewport. This allows destroying the fragment and re-attaching afterwards at the same state.
+Saves the current viewport. This allows destroying the view and restarting afterwards at the same state.
 
-#### `boolean restart()`
+#### `restart()`
 
 Restarts the current viewport cache. This will reset all tracked points, along with resetting the user's view position and zoom level.
 
-#### `void stop()`
+#### `stop()`
 
-Stops the MotionDna algorithm. Call this before the fragment is detached permanently.
+Stops the MotionDna algorithm. Call this before destroying the view.
 
