@@ -105,7 +105,7 @@ if let maps = maps {
 
 #### `MotionDnaMaps()`
 
-This is the constructor you will use to create a maps instance. The maps instance is an extension of `WKWebView`, and so you should add this object to whatever container you want.
+This is the constructor you will use to create a maps instance. The maps instance is an extension of `WKWebView`, and so you should add this object to a `View Container` formatted in whatever way you want.
 
 Once you have created a `MotionDnaMaps` object, you can use it to call further setup functions. Make sure to call all setup functions before calling the `run()` function. If you try to invoke a setup function while the `WkWebView` is in display, you will need to restart the `WkWebView` for those changes to take effect.
 
