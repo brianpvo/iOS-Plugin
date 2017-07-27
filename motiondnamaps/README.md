@@ -111,7 +111,7 @@ Once you have created a `MotionDnaMaps` object, you can use it to call further s
 
 #### `@objc enum Maps`
 
-These are the default tiling servers provided. You may use a custom tiling server instead with the [`addMap(url, andJSON)`](#addmapurl-string-andjson-jsonoptions-string---motiondnamaps) method instead.
+These are the default tiling servers provided. You may use a custom tiling server instead with the [`addMap(url, andJSON)`](#addmapurl-string-andjson-string---motiondnamaps) method instead.
 
  * `OSM_Mapnik`: Open Street Maps, does not require a key, no custom map style
  * `OSM_France`: Open Street Maps, does not require a key, custom map style is France, slighty higher zoom compared to OSM_Mapnik
@@ -168,7 +168,7 @@ Note: This is a dangerous method to call, as it prevents cleaning up of browser 
 
 This will set navigation to local cartesian coordinates, preventing usage of GPS localization. Furthermore, no default map will be added.
 
-You can use the custom [`addMap(url, andJSON)`](#addmapurl-string-andjson-jsonoptions-string---motiondnamaps) with this to set custom map tiles that better reflect local coordinates (for example an open grid or virtual world).
+You can use the custom [`addMap(url, andJSON)`](#addmapurl-string-andjson-string---motiondnamaps) with this to set custom map tiles that better reflect local coordinates (for example an open grid or virtual world).
 
 Note: the [`addControls()`](#addcontrols---motiondnamaps) will be disabled when local coordinates are enabled, preventing the user from setting a custom location and heading.
 
