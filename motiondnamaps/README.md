@@ -39,7 +39,9 @@ First, we create the `maps` object. Then we add it to the container we created i
 
 ## Video Tutorial
 
-Coming Soon!
+[![https://youtu.be/bQJGGpS6wg8](http://i.imgur.com/a3EOYDd.png)](https://youtu.be/bQJGGpS6wg8)
+
+Please note that the demo is not meant to show best coding practices , and the setup is only meant as a demo for using the Maps plugin.
 
 ## Using the Interface
 
