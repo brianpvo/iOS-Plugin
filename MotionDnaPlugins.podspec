@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint MotionDnaPlugins.podspec' to ensure this is a
+# Be sure to run `pod lib lint NavisensPlugins.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,8 +7,8 @@
 #
 
 Pod::Spec.new do |s|
-s.name             = 'MotionDnaPlugins'
-s.version          = '0.3.0'
+s.name             = 'NavisensPlugins'
+s.version          = '1.0.0'
 s.summary          = 'Provides different plugins for MotionDnaSDK.'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ s.summary          = 'Provides different plugins for MotionDnaSDK.'
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
 s.description      = <<-DESC
-MotionDnaPlugins contains a list of various plugin to be used with MotionDnaSDK. They provide additional functionality in an easy-to-use and modular format. Make sure you have access to a MotionDnaSDK developer key before using this! See navisens.com for more information.
+NavisensPlugins contains a list of various plugin to be used with MotionDnaSDK. They provide additional functionality in an easy-to-use and modular format. Make sure you have access to a MotionDnaSDK developer key before using this! See navisens.com for more information.
 DESC
 
 s.homepage         = 'https://github.com/navisens/iOS-Plugin'
