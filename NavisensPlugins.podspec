@@ -41,4 +41,8 @@ s.subspec 'NavisensCore' do |core|
   core.ios.vendored_frameworks = 'navisenscore/NavisensCore.framework'
 end
 
+s.subspec 'NavisensMaps' do |maps|
+  maps.ios.vendored_frameworks = 'navisensmaps/NavisensMaps.framework'
+end
+
 end
