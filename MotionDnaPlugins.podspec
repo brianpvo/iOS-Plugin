@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'MotionDnaPlugins'
-s.version          = '0.2.1'
+s.version          = '0.3.0'
 s.summary          = 'Provides different plugins for MotionDnaSDK.'
 
 # This description is used to generate tags and improve search results.
@@ -33,8 +33,12 @@ s.source           = {
 
 s.ios.deployment_target = '9.1'
 
-s.subspec 'MotionDnaMaps' do |maps|
-  maps.ios.vendored_frameworks = 'motiondnamaps/MotionDnaMaps.framework'
+# s.subspec 'MotionDnaMaps' do |maps|
+#   maps.ios.vendored_frameworks = 'motiondnamaps/MotionDnaMaps.framework'
+# end
+
+s.subspec 'NavisensCore' do |maps|
+  maps.ios.vendored_frameworks = 'navisenscore/NavisensCore.framework'
 end
 
 end
