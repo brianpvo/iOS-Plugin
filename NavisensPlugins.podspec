@@ -37,8 +37,8 @@ s.ios.deployment_target = '9.1'
 #   maps.ios.vendored_frameworks = 'motiondnamaps/MotionDnaMaps.framework'
 # end
 
-s.subspec 'NavisensCore' do |maps|
-  maps.ios.vendored_frameworks = 'navisenscore/NavisensCore.framework'
+s.subspec 'NavisensCore' do |core|
+  core.ios.vendored_frameworks = 'navisenscore/NavisensCore.framework'
 end
 
 end
