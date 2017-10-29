@@ -1,0 +1,14 @@
+.leaflet-control-messagebox {
+	/* display: none; /* Initially hidden */
+	opacity: 0;
+	border: 2px solid #dd4958; /* navisens-orange */
+	border-radius: 1px;
+	background-color: white;
+	padding: 3px 10px;
+	margin-left: 30px;
+
+	-webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
