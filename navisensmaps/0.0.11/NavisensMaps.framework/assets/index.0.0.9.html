@@ -1,0 +1,108 @@
+<html>
+<head>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+          integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
+            integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
+            crossorigin=""></script>
+
+    <link rel="stylesheet" href="leaflet-messagebox-master/leaflet-messagebox.css">
+    <script src="leaflet-messagebox-master/leaflet-messagebox.js"></script>
+
+    <script type="text/javascript" src="L.Control.Credits-master/dist/leaflet-control-credits.js"></script>
+    <link rel="stylesheet" href="L.Control.Credits-master/dist/leaflet-control-credits.css" />
+
+    <script src="PruneCluster/dist/PruneCluster.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-easybutton@2.0.0/src/easy-button.css">
+    <script src="https://unpkg.com/leaflet-easybutton@2.0.0/src/easy-button.js"></script>
+
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <script src="js/lz-string.min.js"></script>
+
+    <link rel="stylesheet" href="Leaflet.SimpleGraticule-master/L.SimpleGraticule.css">
+    <script type="text/javascript" src="Leaflet.SimpleGraticule-master/L.SimpleGraticule.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100vh;
+    width: 100vw;
+}
+#overlay {
+    display:    none;
+    opacity:    0;
+    background: rgba(0, 0, 0, 0.5);
+    width:      100%;
+    height:     100%;
+    z-index:    1001;
+    top:        0;
+    left:       0;
+    position:   fixed;
+
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+}
+.overlay-centered {
+    font-size: 20px;
+    text-align: center;
+
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    top: 50%;
+    left: 50%;
+    margin-left: -80px;
+    margin-top: -80px;
+}​
+
+@-moz-keyframes spin {
+     67% { -moz-transform: rotate(360deg); }
+    100% { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+     67% { -webkit-transform: rotate(360deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+     67% { -webkit-transform: rotate(360deg); transform:rotate(360deg); }
+    100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); }
+}
+
+.overlay-image {
+    -webkit-animation:spin 1.5s ease-in-out infinite;
+    -moz-animation:spin 1.5s ease-in-out infinite;
+    animation:spin 1.5s ease-in-out infinite;
+}
+
+.icon {
+    font-size: 1.667em;
+    line-height: 1.333em;
+}
+.navisens-orange {
+    color: #dd4958;
+}
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <div id="overlay" class="navisens-orange">
+        <span class="overlay-centered">
+            <img id="navisens" class="overlay-image" src="navisens.svg" width="160" height="160">
+            <b>Acquiring GPS location ...</b>
+        </span>
+    </div>
+
+    <script src="js/index.0.0.9.js"></script>
+</body>
+</html>
