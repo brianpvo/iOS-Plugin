@@ -1,23 +1,24 @@
 # Navisens/iOS-Plugin
 
-This repository contains plugins supported for iOS built on top of out [MotionDnaSDK](https://github.com/navisens/iOS-SDK).
+This repository contains plugins supported for iOS built on top of our [MotionDnaSDK](https://github.com/navisens/iOS-SDK).
 
 The set up works by adding additional dependencies to your podfile.
 
 ## Setup
 
-To add an additional plugin, simply add the following to your podfile
+To add an additional plugin, modify your podfile. Simply install the `navisenscore` plugin, and then add any other plugins
 
 ```ruby
 target '<PROJECT NAME>' do
   # ...
-  pod 'MotionDnaPlugins/<PLUGIN NAME>', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories'
+  pod 'NavisensPlugins/NavisensCore', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories'
+  pod 'NavisensPlugins/<PLUGIN NAME>', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories'
 end
 ```
 
 The `<PLUGIN NAME>` contains the plugin you want to install. You can provide an optional `:commit` tag if you wish to specify a specific version of the plugin.
 
-Example: to import the MotionDnaMaps plugin for a MapNavigation project, use
+Example: to import version 0.0.12 of the NavisensMaps plugin for a MapNavigation project, use
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
@@ -26,24 +27,25 @@ platform :ios, '9.1'
 target 'MapNavigation’ do
   use_frameworks!
   pod 'MotionDnaSDK', :git => 'https://github.com/navisens/iOS-SDK.git'
-  pod 'MotionDnaPlugins/MotionDnaMaps', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories'
+  pod 'NavisensPlugins/NavisensCore', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories', :commit => 'cefe3a0b77'
+  pod 'NavisensPlugins/NavisensMaps', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories', :commit => 'cefe3a0b77'
 end
 ```
 
 The source code for projects is also provided to allow for full customization.
 
+## Core
+
+You must have the **[Navisens Core](navisenscore)** set up before you can use any plugins.
+
 ## Plugins
 
 The following is a list of all supported plugins. Special setup instructions and relevant stable version numbers linked.
 
-#### [MotionDna maps](motiondnamaps)
+#### [Navisens Maps](navisensmaps)
 
 Quick and easy maps support built upon [leafletjs](http://leafletjs.com)
 
-#### Coming soon...
+#### [NaviShare](navishare)
 
-Summary info
-
-#### Coming soon too...
-
-Summary info again
+Wrapper which makes it easy to connect to servers and share location or even raw data between devices.
