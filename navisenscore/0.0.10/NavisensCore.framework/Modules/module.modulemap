@@ -1,0 +1,11 @@
+framework module NavisensCore {
+  umbrella header "NavisensCore.h"
+
+  export *
+  module * { export * }
+}
+
+module NavisensCore.Swift {
+    header "NavisensCore-Swift.h"
+    requires objc
+}
