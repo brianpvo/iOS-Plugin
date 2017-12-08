@@ -45,4 +45,8 @@ s.subspec 'NavisensMaps' do |maps|
   maps.ios.vendored_frameworks = 'navisensmaps/NavisensMaps.framework'
 end
 
+s.subspec 'NaviShare' do |share|
+  share.ios.vendored_frameworks = 'navishare/NaviShare.framework'
+end
+
 end
