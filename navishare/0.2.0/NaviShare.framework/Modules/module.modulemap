@@ -1,0 +1,11 @@
+framework module NaviShare {
+  umbrella header "NaviShare.h"
+
+  export *
+  module * { export * }
+}
+
+module NaviShare.Swift {
+    header "NaviShare-Swift.h"
+    requires objc
+}
