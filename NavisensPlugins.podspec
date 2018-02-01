@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-s.name             = 'NavisensPlugins'
+s.name             = 'NavisensPluginsDevelopment'
 s.version          = '1.1.0'
 s.summary          = 'Provides different plugins for MotionDnaSDK.'
 
@@ -26,7 +26,7 @@ s.license          = { :type => 'BSD-3', :file => 'LICENSE' }
 s.author           = { 'Joseph Chen' => 'joseph.chen@navisens.com' }
 s.source           = {
   :git => 'https://github.com/navisens/iOS-Plugin.git',
-  :branch => 'repositories',
+  :branch => 'development',
   :submodules => true,
   :tag => s.version.to_s
 }
