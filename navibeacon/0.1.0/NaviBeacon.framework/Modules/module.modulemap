@@ -1,0 +1,11 @@
+framework module NaviBeacon {
+  umbrella header "NaviBeacon.h"
+
+  export *
+  module * { export * }
+}
+
+module NaviBeacon.Swift {
+    header "NaviBeacon-Swift.h"
+    requires objc
+}

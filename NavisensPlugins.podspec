@@ -49,4 +49,8 @@ s.subspec 'NaviShare' do |share|
   share.ios.vendored_frameworks = 'navishare/NaviShare.framework'
 end
 
+s.subspec 'NaviBeacon' do |beacon|
+  beacon.ios.vendored_frameworks = 'navibeacon/NaviBeacon.framework'
+end
+
 end
