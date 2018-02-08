@@ -6,7 +6,7 @@ The latest stable version is `0.2.1`, and it is built on top of iOS MotionDnaSDK
 
 Add the following to your podfile:
 
-```pod
+```ruby
   pod 'NavisensPlugins/NaviBeacon', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories'
 ```
 
