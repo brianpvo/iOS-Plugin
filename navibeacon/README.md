@@ -4,10 +4,10 @@ This plugin helps facilitate connecting with nearby beacons and allows automatic
 
 The latest stable version is `0.2.1`, and it is built on top of iOS MotionDnaSDK version `1.2.2`.
 
-Add the following to your app's dependencies:
+Add the following to your podfile:
 
-```gradle
-    compile 'com.navisens:navibeacon:0.2.1'
+```pod
+  pod 'NavisensPlugins/NaviBeacon', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories'
 ```
 
 ## Setup
