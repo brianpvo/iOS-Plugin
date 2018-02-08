@@ -49,11 +49,11 @@ The `latitude`, `longitude`, `heading`, and `floor` parameters are optionals. If
 
 These methods allow you to control beacon scanning behavior while the app is running.
 
-#### `void resumeScanning()`
+#### `func resumeScanning() -> void`
 
 If scanning was paused recently, continue scanning for nearby beacons.
 
-#### `void pauseScanning()`
+#### `func pauseScanning() -> void`
 
 If currently scanning for beacons, stop doing so until `resumeScanning` is called.
 
