@@ -4,6 +4,8 @@ This repository contains plugins supported for iOS built on top of our [MotionDn
 
 The set up works by adding additional dependencies to your podfile.
 
+*The source code for all plugins is also provided to allow for full customization!*
+
 ## Setup
 
 To add an additional plugin, modify your podfile. Simply install the `navisenscore` plugin, and then add any other plugins
@@ -31,8 +33,6 @@ target 'MapNavigation’ do
   pod 'NavisensPlugins/NavisensMaps', :git => 'https://github.com/navisens/iOS-Plugin.git', :branch => 'repositories', :commit => 'cefe3a0b77'
 end
 ```
-
-The source code for projects is also provided to allow for full customization.
 
 ## Core
 
