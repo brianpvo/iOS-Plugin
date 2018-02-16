@@ -98,7 +98,7 @@ public class NavisensMaps: NavisensPlugin {
         return false
       }
       
-      if let index = bundle.path(forResource: "index.0.0.13", ofType: "html", inDirectory: "assets") {
+      if let index = bundle.path(forResource: "index.0.0.14", ofType: "html", inDirectory: "assets") {
         let html = try String(contentsOfFile: index, encoding: .utf8)
         let url = URL(fileURLWithPath: assets)
         self.webView.loadHTMLString(html as String, baseURL: url)

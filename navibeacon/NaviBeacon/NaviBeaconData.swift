@@ -9,12 +9,12 @@
 import CoreLocation
 
 public class NaviBeaconData {
-  let id: String
-  let region: CLBeaconRegion
-  let latitude: Double?
-  let longitude: Double?
-  let heading: Double?
-  let floor: Int?
+  public let id: String
+  public let region: CLBeaconRegion
+  public let latitude: Double?
+  public let longitude: Double?
+  public let heading: Double?
+  public let floor: Int?
   
   init(_ id: String, region: CLBeaconRegion, lat: Double?, lng: Double?, hdg: Double?, flr: Int?) {
     self.id = id

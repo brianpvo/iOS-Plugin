@@ -142,10 +142,12 @@ public class NaviShare: NavisensPlugin {
       observers.forEach({ observer in
         observer.roomCapacityExceeded()
       })
+      self.disconnect()
     case EXCEEDED_SERVER_ROOM_CAPACITY:
       observers.forEach({ observer in
         observer.serverCapacityExceeded()
       })
+      self.disconnect()
     default:
       break
     }

@@ -16,7 +16,8 @@ public class NavisensCore {
   NETWORK_DNA  = 2,
   NETWORK_DATA = 4,
   PLUGIN_DATA  = 8,
-  ERRORS       = 16
+  ERRORS       = 16,
+  ALL          = 31
 
   let REQUEST_MDNA_PERMISSIONS = 1
   
@@ -33,7 +34,7 @@ public class NavisensCore {
   
   public init(_ devKey: String) {
     var i = 1
-    while i <= NavisensCore.ERRORS {
+    while i <= NavisensCore.ALL {
       subscribers[i] = Set<NavisensPlugin>()
       i <<= 1
     }
@@ -98,12 +99,8 @@ public class NavisensCore {
   
   public func remove(_ plugin: NavisensPlugin) {
     if plugins.contains(plugin) {
+      unsubscribe(plugin, from: NavisensCore.ALL)
       plugins.remove(plugin)
-      var i = 1
-      while i <= NavisensCore.ERRORS {
-        subscribers[i]?.remove(plugin)
-        i <<= 1
-      }
     }
   }
   
@@ -119,9 +116,19 @@ public class NavisensCore {
   
   public func subscribe(_ plugin: NavisensPlugin, to which: Int) {
     var i = 1
-    while i <= NavisensCore.ERRORS {
+    while i <= NavisensCore.ALL {
       if (i & which) > 0 {
         subscribers[i]!.insert(plugin)
+      }
+      i <<= 1
+    }
+  }
+  
+  public func unsubscribe(_ plugin: NavisensPlugin, from which: Int) {
+    var i = 1
+    while i <= NavisensCore.ALL {
+      if (i & which) > 0 {
+        subscribers[i]!.remove(plugin)
       }
       i <<= 1
     }

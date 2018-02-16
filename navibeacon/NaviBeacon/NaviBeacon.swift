@@ -34,6 +34,7 @@ public class NaviBeacon: NavisensPlugin {
         if let floor = data.floor {
           self.core?.motionDna?.setFloorNumber(Int32(floor))
         }
+        self.core?.settings.overrideEstimationMode(LOCAL)
       }
     case .near:
       if self.resetRequired > 0 {
