@@ -46,14 +46,26 @@ The following is a list of all supported plugins. Special setup instructions and
 
 Quick and easy maps support built upon [leafletjs](http://leafletjs.com)
 
+<img src="https://github.com/navisens/NaviDocs/blob/resources/Images/Manual.gif" alt="NaviBeacons" width=250/>
+
+-----
+
 #### [NaviShare](navishare)
 
 Wrapper which makes it easy to connect to servers and share location or even raw data between devices.
+
+-----
 
 #### [NaviBeacon](navibeacon)
 
 Adds support for syncing your location with iBeacons.
 
+<img src="https://github.com/navisens/NaviDocs/blob/resources/Images/Beacons.gif" alt="NaviBeacons" width=250/>
+
+-----
+
 #### [NaviPoints](navipoints)
 
 Adds a simple way of adding named points and initializing user location based on these points.
+
+<img src="https://github.com/navisens/NaviDocs/blob/resources/Images/POI.gif" alt="NaviBeacons" width=250/>
