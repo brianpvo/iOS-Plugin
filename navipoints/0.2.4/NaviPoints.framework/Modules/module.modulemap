@@ -1,0 +1,11 @@
+framework module NaviPoints {
+  umbrella header "NaviPoints.h"
+
+  export *
+  module * { export * }
+}
+
+module NaviPoints.Swift {
+    header "NaviPoints-Swift.h"
+    requires objc
+}
