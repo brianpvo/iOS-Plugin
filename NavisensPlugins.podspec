@@ -7,8 +7,8 @@
 #
 
 Pod::Spec.new do |s|
-s.name             = 'NavisensPluginsDevelopment'
-s.version          = '1.1.0'
+s.name             = 'NavisensPlugins'
+s.version          = '1.3.0'
 s.summary          = 'Provides different plugins for MotionDnaSDK.'
 
 # This description is used to generate tags and improve search results.
@@ -51,6 +51,10 @@ end
 
 s.subspec 'NaviBeacon' do |beacon|
   beacon.ios.vendored_frameworks = 'navibeacon/NaviBeacon.framework'
+end
+
+s.subspec 'NaviPoints' do |points|
+  points.ios.vendored_frameworks = 'navipoints/NaviPoints.framework'
 end
 
 end

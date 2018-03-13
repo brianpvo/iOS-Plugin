@@ -1,0 +1,11 @@
+framework module NavisensMaps {
+  umbrella header "NavisensMaps.h"
+
+  export *
+  module * { export * }
+}
+
+module NavisensMaps.Swift {
+    header "NavisensMaps-Swift.h"
+    requires objc
+}
