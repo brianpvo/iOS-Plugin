@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-s.name             = 'NavisensPlugins'
+s.name             = 'NavisensPluginsDevelopment'
 s.version          = '1.3.0'
 s.summary          = 'Provides different plugins for MotionDnaSDK.'
 
