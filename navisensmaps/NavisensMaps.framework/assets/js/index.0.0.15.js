@@ -800,7 +800,7 @@ function onClickLocation(control) {
       volatileDistance = MIN_DISTANCE;
     volatileSamples = 0;
     
-    window.JSInterface.customLocationInitialized(customLocation.getLatLng().lat, customLocation.getLatLng().lng, users[userID][1].heading);
+    webkit.messageHandlers.customLocationInitialized.postMessage([customLocation.getLatLng().lat, customLocation.getLatLng().lng, users[userID][1].heading]);
     
     clean();
     
@@ -850,7 +850,7 @@ function onClickHeading(control) {
   message.show('Drag the circle to change your heading, or tap on the map to look in a direction. Then, face your phone in the new direction. Press the &check; to confirm, or the &cross; to cancel.', 30000);
   
   confirm = function() {
-    window.JSInterface.customLocationInitialized(users[userID][0].getLatLng().lat, users[userID][0].getLatLng().lng, customRotationIcon.heading);
+    webkit.messageHandlers.customLocationInitialized.postMessage([users[userID][0].getLatLng().lat, users[userID][0].getLatLng().lng, customRotationIcon.heading]);
     clean();
   };
   
@@ -1117,7 +1117,7 @@ function CLICK_POINT(id) {
       volatileDistance = MIN_DISTANCE;
     volatileSamples = 0;
     
-    window.JSInterface.customLocationInitialized(naviPoints[id].getLatLng().lat, naviPoints[id].getLatLng().lng, users[userID][1].heading);
+    webkit.messageHandlers.customLocationInitialized.postMessage([naviPoints[id].getLatLng().lat, naviPoints[id].getLatLng().lng, users[userID][1].heading]);
   }
 }
 
