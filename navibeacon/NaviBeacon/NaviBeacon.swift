@@ -15,8 +15,13 @@ import NavisensCore
 public class NaviBeacon: NavisensPlugin {
   // MARK: Properties
   
+  public static let PLUGIN_IDENTIFIER = "com.navisens.pojostick.navibeacon",
+                    MAPS_IDENTIFIER = "com.navisens.pojostick.navisensmaps",
+                    OPERATION_ADD = 1;
+  
   private var lastHeading = 0.0
   private var resetRequired = 0
+  private var mapsExists = false
   
   public lazy var defaultOnBeaconChanged: (CLBeacon, NaviBeaconData) -> () = { [unowned self] beacon, data in
     let RESET_DURATION = 5
@@ -64,7 +69,8 @@ public class NaviBeacon: NavisensPlugin {
   override public func initialize(usingCore core: NavisensCore, andArgs args: [Any]) -> Bool {
     self.core = core
     
-    core.subscribe(self, to: NavisensCore.MOTION_DNA)
+    core.subscribe(self, to: NavisensCore.MOTION_DNA | NavisensCore.PLUGIN_DATA)
+    core.broadcast(NaviBeacon.PLUGIN_IDENTIFIER, operation: NavisensCore.OPERATION_INIT)
     
     locationManager.requestAlwaysAuthorization()
     locationManager.delegate = beaconDelegate!
@@ -79,6 +85,9 @@ public class NaviBeacon: NavisensPlugin {
     let beacon = NaviBeaconData(identifier, region: region, lat: latitude, lng: longitude, hdg: heading, flr: floor)
     beacons[uuid] = beacon
     locationManager.startRangingBeacons(in: region)
+    if let latitude = latitude, let longitude = longitude, mapsExists {
+      sendBeacon(latitude, longitude);
+    }
     return self
   }
   
@@ -100,16 +109,44 @@ public class NaviBeacon: NavisensPlugin {
     }
   }
   
+  private func sendBeacon(_ latitude: Double?, _ longitude: Double?) {
+    if let core = self.core, let latitude = latitude, let longitude = longitude {
+      core.broadcast(NaviBeacon.PLUGIN_IDENTIFIER, operation: NaviBeacon.OPERATION_ADD, data: latitude, longitude)
+    }
+  }
+  
   // MARK: Overrides
   
   override public func stop() -> Bool {
     self.pauseScanning()
     core!.remove(self)
+    core!.broadcast(NaviBeacon.PLUGIN_IDENTIFIER, operation: NavisensCore.OPERATION_STOP)
     return true
   }
   
   override public func receiveMotionDna(_ motionDna: MotionDna!) throws {
     lastHeading = motionDna.getLocation().heading
+  }
+  
+  override public func receivePluginData(_ tag: String, operation: Int, data: [Any]) throws {
+    switch tag {
+    case NaviBeacon.MAPS_IDENTIFIER:
+      mapsExists = true;
+      switch operation {
+      case NavisensCore.OPERATION_INIT:
+        fallthrough
+      case NavisensCore.OPERATION_ACK where data.first as? String == NaviBeacon.PLUGIN_IDENTIFIER:
+        for (_, beaconData) in beacons {
+          sendBeacon(beaconData.latitude, beaconData.longitude);
+        }
+      case NavisensCore.OPERATION_STOP:
+        mapsExists = false
+      default:
+        break
+      }
+    default:
+      break
+    }
   }
   
   // MARK: NaviBeaconDelegate
