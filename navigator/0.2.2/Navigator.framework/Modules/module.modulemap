@@ -1,0 +1,11 @@
+framework module Navigator {
+  umbrella header "Navigator.h"
+
+  export *
+  module * { export * }
+}
+
+module Navigator.Swift {
+    header "Navigator-Swift.h"
+    requires objc
+}
