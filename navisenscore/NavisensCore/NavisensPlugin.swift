@@ -40,7 +40,7 @@ open class NavisensPlugin : Hashable {
   open func receiveNetworkData(_ networkCode: NetworkCode, withPayload map: Dictionary<AnyHashable, Any>) throws {
     throw NavisensError.Unimplemented("NavisensPlugin used but missing implementation for receiveNetworkData.")
   }
-  open func receivePluginData(_ tag: String, data: Any) throws {
+  open func receivePluginData(_ tag: String, operation: Int, data: [Any]) throws {
     throw NavisensError.Unimplemented("NavisensPlugin used but missing implementation for receivePluginData.")
   }
   open func reportError(_ errorCode: ErrorCode, withMessage s: String) throws {

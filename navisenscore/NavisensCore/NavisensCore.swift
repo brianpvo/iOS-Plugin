@@ -12,12 +12,16 @@ import MotionDnaSDK
 
 public class NavisensCore {
   public static let NOTHING = 0,
-  MOTION_DNA   = 1,
-  NETWORK_DNA  = 2,
-  NETWORK_DATA = 4,
-  PLUGIN_DATA  = 8,
-  ERRORS       = 16,
-  ALL          = 31
+  MOTION_DNA      = 1,
+  NETWORK_DNA     = 2,
+  NETWORK_DATA    = 4,
+  PLUGIN_DATA     = 8,
+  ERRORS          = 16,
+  ALL             = 31,
+  
+  OPERATION_INIT  = 0,
+  OPERATION_ACK   = -1,
+  OPERATION_STOP  = -2;
 
   let REQUEST_MDNA_PERMISSIONS = 1
   
@@ -49,7 +53,7 @@ public class NavisensCore {
   
   // MARK: Interface
   
-  public func add<T: NavisensPlugin> (_ navisensPlugin: T.Type, withParams params: Any...) -> T? {
+  public func add<T: NavisensPlugin>(_ navisensPlugin: T.Type, withParams params: Any...) -> T? {
     do {
       let plugin = navisensPlugin.init()
       if try plugin.initialize(usingCore: self, andArgs: params) {
@@ -104,10 +108,10 @@ public class NavisensCore {
     }
   }
   
-  public func broadcast(_ tag: String, data: Any) {
+  public func broadcast(_ tag: String, operation: Int, data: Any...) {
     for plugin in subscribers[NavisensCore.PLUGIN_DATA]! {
       do {
-        try plugin.receivePluginData(tag, data: data)
+        try plugin.receivePluginData(tag, operation: operation, data: data)
       } catch let errorMessage {
         print("Error when broadcasting to plugin \(plugin): \(errorMessage)")
       }
@@ -155,6 +159,8 @@ public class NavisensCore {
     var host : String?
     var port : String?
     
+    var needRestartServices = true
+    
     public func requestARMode() {
       overrideARMode(true);
     }
@@ -164,7 +170,7 @@ public class NavisensCore {
     }
     
     public func requestCallbackRate(_ rate: Int) {
-      if (callbackRate == nil || rate < callbackRate!) {
+      if callbackRate == nil || rate < callbackRate! {
         overrideCallbackRate(rate);
       }
     }
@@ -195,7 +201,7 @@ public class NavisensCore {
     }
     
     public func requestNetworkRate(_ rate: Int) {
-      if (networkRate == nil || rate < networkRate!) {
+      if networkRate == nil || rate < networkRate! {
         overrideNetworkRate(rate);
       }
     }
@@ -221,6 +227,7 @@ public class NavisensCore {
     public func overrideHost(_ host: String?, andPort port: String?) {
       self.host = host;
       self.port = port;
+      needRestartServices = true
     }
     
     public func requestRoom(_ room: String) {
@@ -229,6 +236,7 @@ public class NavisensCore {
     
     public func overrideRoom(_ room: String?) {
       self.room = room;
+      needRestartServices = true
     }
   }
   
@@ -251,6 +259,7 @@ public class NavisensCore {
         NavisensCore.globalSettings.callbackRate! : 100));
       self.setExternalPositioningState(NavisensCore.globalSettings.positioningMode != nil ?
         NavisensCore.globalSettings.positioningMode! : HIGH_ACCURACY);
+      self.setMapCorrectionEnabled(true)
       self.setNetworkUpdateRateInMs(Double(NavisensCore.globalSettings.networkRate != nil ?
         NavisensCore.globalSettings.networkRate! : 100));
       self.setPowerMode(NavisensCore.globalSettings.powerMode != nil ?
@@ -259,12 +268,15 @@ public class NavisensCore {
     }
     
     func startServices() {
-      if (NavisensCore.globalSettings.estimationMode == GLOBAL) {
+      if !NavisensCore.globalSettings.needRestartServices {
+        return
+      }
+      if NavisensCore.globalSettings.estimationMode == GLOBAL {
         self.setLocationNavisens();
       }
-      if (NavisensCore.globalSettings.host != nil && NavisensCore.globalSettings.port != nil) {
+      if NavisensCore.globalSettings.host != nil && NavisensCore.globalSettings.port != nil {
         self.stopUDP();
-        if (NavisensCore.globalSettings.room == nil) {
+        if NavisensCore.globalSettings.room == nil {
           self.startUDPHost(NavisensCore.globalSettings.host!, andPort: NavisensCore.globalSettings.port!);
         } else {
           self.startUDPRoom(NavisensCore.globalSettings.room!, atHost: NavisensCore.globalSettings.host!, andPort: NavisensCore.globalSettings.port!);

@@ -41,14 +41,14 @@ public class Navigator: NavisensPlugin {
       return router.path(from: NavigableNode(from), to: NavigableNode(to)).map {($0.latitude, $0.longitude)}
     }
     
-    let diffX = to.0 - from.0
-    let diffY = to.1 - from.1
+    let diffX = abs(to.0 - from.0)
+    let diffY = abs(to.1 - from.1)
     
-    if abs(diffX) < abs(diffY) {
-      let signY = diffY < 0.0 ? -1.0 : 1.0
+    if diffX < diffY {
+      let signY = from.1 < to.1 ? 1.0 : -1.0
       return [from, (to.0, from.1 + diffX * signY), to]
     } else {
-      let signX = diffX < 0.0 ? -1.0 : 1.0
+      let signX = from.0 < to.0 ? 1.0 : -1.0
       return [from, (from.0 + diffY * signX, to.1), to]
     }
   }

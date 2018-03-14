@@ -71,6 +71,11 @@ public class NavisensMaps: NavisensPlugin {
   let DEFAULT_MAP = "addMap_OpenStreetMap_Mapnik();"
   let LOCAL_SCALING: Double = 1 // pow(2, -17)
   
+  public static let PLUGIN_IDENTIFIER = "com.navisens.pojostick.navisensmaps",
+                    BEACON_IDENTIFIER = "com.navisens.pojostick.navibeacon",
+                    POINTS_IDENTIFIER = "com.navisens.pojostick.navipoints",
+                    NAVIGATOR_IDENTIFIER = "com.navisens.pojostick.navigator"
+  
   private var lastLocation: LocationStatus = UNINITIALIZED
   private var customLocation: Bool = false, shouldRestart: Bool = true
   
@@ -82,6 +87,9 @@ public class NavisensMaps: NavisensPlugin {
   private weak var mapsContainer: UIView?
   private var javascript: String = ""
   private var x: Double = 0, y: Double = 0, h: Double = 0
+  
+  private var initalizedJS = false
+  private var beaconsExist = false, pointsExist = false, navigatorExist = false
   
   // MARK: Initializers
   required public init() {
@@ -98,7 +106,7 @@ public class NavisensMaps: NavisensPlugin {
         return false
       }
       
-      if let index = bundle.path(forResource: "index.0.0.14", ofType: "html", inDirectory: "assets") {
+      if let index = bundle.path(forResource: "index.0.0.18", ofType: "html", inDirectory: "assets") {
         let html = try String(contentsOfFile: index, encoding: .utf8)
         let url = URL(fileURLWithPath: assets)
         self.webView.loadHTMLString(html as String, baseURL: url)
@@ -112,7 +120,8 @@ public class NavisensMaps: NavisensPlugin {
       return false
     }
     
-    core.subscribe(self, to: NavisensCore.MOTION_DNA | NavisensCore.NETWORK_DNA)
+    core.subscribe(self, to: NavisensCore.MOTION_DNA | NavisensCore.NETWORK_DNA | NavisensCore.PLUGIN_DATA)
+    core.broadcast(NavisensMaps.PLUGIN_IDENTIFIER, operation: NavisensCore.OPERATION_INIT)
     
     return true
   }
@@ -185,7 +194,8 @@ public class NavisensMaps: NavisensPlugin {
   
   override public func stop() -> Bool {
     self.webView.evaluateJS("STOP();")
-    core?.remove(self)
+    core!.remove(self)
+    core!.broadcast(NavisensMaps.PLUGIN_IDENTIFIER, operation: NavisensCore.OPERATION_STOP)
     return true
   }
   
@@ -204,6 +214,53 @@ public class NavisensMaps: NavisensPlugin {
     self.webView.initialize(self, inContainer: container)
     return self
   }
+  
+  private func addBeacon(_ lat: Double, _ lng: Double) {
+    let js = "ADD_BEACON(\(lat), \(lng));"
+    if self.initalizedJS {
+      self.webView.evaluateJS(js)
+    } else {
+      javascript += js
+    }
+  }
+  
+  private func addPoint(_ id: String, _ lat: Double, _ lng: Double) {
+    let js = "ADD_POINT('\(id)', \(lat), \(lng));"
+    if self.initalizedJS {
+      self.webView.evaluateJS(js)
+    } else {
+      javascript += js
+    }
+  }
+
+  private func removePoint(_ id: String) {
+    let js = "REMOVE_POINT('\(id)');"
+    if self.initalizedJS {
+      self.webView.evaluateJS(js)
+    } else {
+      javascript += js
+    }
+  }
+  
+  public func showRoute(_ route: [(Double, Double)]) {
+    let js = "SHOW_ROUTE(\(route.map{[$0, $1]}));"
+    if self.initalizedJS {
+      self.webView.evaluateJS(js)
+    } else {
+      javascript += js
+    }
+  }
+  
+  public func clearRoute() {
+    let js = "CLEAR_ROUTE();"
+    if self.initalizedJS {
+      self.webView.evaluateJS(js)
+    } else {
+      javascript += js
+    }
+  }
+  
+  // MARK: Overrides
   
   override public func receiveMotionDna(_ motionDna: MotionDna!) throws {
     let location = motionDna.getLocation()
@@ -264,7 +321,69 @@ public class NavisensMaps: NavisensPlugin {
   override public func receiveNetworkData(_ networkCode: NetworkCode, withPayload map: Dictionary<AnyHashable, Any>) throws {
   }
   
-  override public func receivePluginData(_ tag: String, data: Any) throws {
+  override public func receivePluginData(_ tag: String, operation: Int, data: [Any]) throws {
+    switch tag {
+    case NavisensMaps.BEACON_IDENTIFIER:
+      handleBeaconPlugin(operation: operation, data: data)
+    case NavisensMaps.POINTS_IDENTIFIER:
+      handlePointsPlugin(operation: operation, data: data)
+    case NavisensMaps.NAVIGATOR_IDENTIFIER:
+      handleNavigatorPlugin(operation: operation, data: data)
+    default:
+      break
+    }
+  }
+  
+  private func handleBeaconPlugin(operation: Int, data: [Any]) {
+    beaconsExist = true
+    switch operation {
+    case NavisensCore.OPERATION_INIT:
+      core?.broadcast(NavisensMaps.PLUGIN_IDENTIFIER, operation: NavisensCore.OPERATION_ACK, data: NavisensMaps.BEACON_IDENTIFIER)
+    case NavisensCore.OPERATION_STOP:
+      beaconsExist = false
+    default:
+      if data.count >= 2, let lat = data[0] as? Double, let lng = data[1] as? Double {
+        addBeacon(lat, lng)
+      }
+    }
+  }
+  
+  private func handlePointsPlugin(operation: Int, data: [Any]) {
+    pointsExist = true
+    switch operation {
+    case NavisensCore.OPERATION_INIT:
+      core?.broadcast(NavisensMaps.PLUGIN_IDENTIFIER, operation: NavisensCore.OPERATION_ACK, data: NavisensMaps.POINTS_IDENTIFIER)
+    case NavisensCore.OPERATION_STOP:
+      pointsExist = false
+    case 1:
+      if data.count >= 3, let id = data[0] as? String, let lat = data[1] as? Double, let lng = data[2] as? Double {
+        addPoint(id, lat, lng)
+      } else {
+        print("Invalid format 1: \(data) with types: \(data.map{type(of: $0)})")
+      }
+    case 2:
+      if data.count >= 1, let id = data[0] as? String {
+        removePoint(id)
+      } else {
+        print("Invalid format 2: \(data) with types: \(data.map{type(of: $0)})")
+      }
+    default:
+      break
+    }
+  }
+  
+  private func handleNavigatorPlugin(operation: Int, data: [Any]) {
+    navigatorExist = true
+    switch operation {
+    case NavisensCore.OPERATION_STOP:
+      navigatorExist = false
+    case 1:
+      if data.count >= 1, let route = data[0] as? [(Double, Double)] {
+        showRoute(route)
+      }
+    default:
+      break
+    }
   }
   
   override public func reportError(_ error: ErrorCode, withMessage message: String!) throws {
@@ -316,6 +435,7 @@ public class NavisensMaps: NavisensPlugin {
         parent.core?.startServices()
 
         if parent.shouldRestart {
+          parent.shouldRestart = false
           parent.restart()
         }
         parent.javascript = "SET_ID('\(parent.core?.motionDna?.getDeviceID()! ?? "")');\(parent.javascript)";
@@ -326,12 +446,15 @@ public class NavisensMaps: NavisensPlugin {
         if parent.shareLocation {
           parent.core?.motionDna?.startUDP()
         }
+        parent.initalizedJS = true
       }
     }
     
     func evaluateJS(_ string: String!) {
       // print ("Evaluating javascript: '\(string!)'")
-      self.evaluateJavaScript(string!)
+      DispatchQueue.main.async {
+        self.evaluateJavaScript(string!)
+      }
     }
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
