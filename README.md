@@ -69,3 +69,9 @@ Adds support for syncing your location with iBeacons.
 Adds a simple way of adding named points and initializing user location based on these points.
 
 <img src="https://github.com/navisens/NaviDocs/blob/resources/Images/POI.gif" alt="NaviBeacons" width=250/>
+
+-----
+
+#### [Navigator](navigator)
+
+Adds a simple path generator that can be rendered with our Maps plugin.
