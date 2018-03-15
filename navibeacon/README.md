@@ -2,7 +2,7 @@
 
 This plugin helps facilitate connecting with nearby beacons and allows automatically initializing user location with beacons, or doing custom actions upon entering beacon range.
 
-The latest stable version is `0.2.1`, and it is built on top of iOS MotionDnaSDK version `1.2.2`.
+The latest stable version is `0.2.5`, and it is built on top of iOS MotionDnaSDK version `1.2.2`.
 
 Add the following to your podfile:
 
