@@ -2,7 +2,7 @@
 
 This plugin can be used to compute and send simple routes to other plugins.
 
-The latest stable version is `0.2.1`, and it is built on top of iOS MotionDnaSDK version `1.2.2`.
+The latest stable version is `0.2.2`, and it is built on top of iOS MotionDnaSDK version `1.2.2`.
 
 Add the following to your podfile:
 
