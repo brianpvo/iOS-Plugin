@@ -4,7 +4,7 @@ This plugin provides a simple implementation of the idea of keeping track of nam
 
 We named this plugin Points because it was originally inspired by the "Points Of Interest" or POIs concept of initializing user location. We simply extended the acronym to POInts to make it easier to remember.
 
-The latest stable version is `0.2.2`.
+The latest stable version is `0.2.5`.
 
 Add the following to your podfile:
 
