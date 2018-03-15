@@ -2,7 +2,7 @@
 
 This is the core upon which all other Navisens Plugins are built on. The `NavisensCore` is a required component of any project that uses any Navisens Plugins. For a list of plugins available, see [the main page.](https://github.com/navisens/iOS-Plugin)
 
-The latest stable version is `0.0.10`, and it is built on top of iOS MotionDnaSDK version `0.6.0`.
+The latest stable version is `2.0.1`, and it is built on top of iOS MotionDnaSDK version `1.2.2`.
 
 Add the following to your podfile above all other plugins:
 
