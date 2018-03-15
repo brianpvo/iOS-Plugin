@@ -2,7 +2,7 @@
 
 This is a plugin that provides a quick-and-easy map built upon [leafletjs](http://leafletjs.com/).
 
-The latest stable version is `0.0.15`, and it is built on top of iOS MotionDnaSDK version `0.6.0`.
+The latest stable version is `0.2.2`, and it is built on top of iOS MotionDnaSDK version `1.2.2`.
 
 To include the plugin in your code, add the following to your app's dependencies:
 
