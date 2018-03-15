@@ -2,7 +2,7 @@
 
 This plugin helps make doing location sharing and other networking tasks easier.
 
-The latest stable version is `0.2.1`, and it is built on top of iOS MotionDnaSDK version `0.6.0`.
+The latest stable version is `0.2.2`, and it is built on top of iOS MotionDnaSDK version `1.2.2`.
 
 Add the following to your app's dependencies:
 
