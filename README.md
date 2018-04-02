@@ -6,6 +6,8 @@ The set up works by adding additional dependencies to your podfile.
 
 *The source code for all plugins is also provided to allow for full customization!*
 
+The plugins system is an extension of the base functionality provided by the MotionDna SDK, and serves to make developing apps easier for you. While it's implementation is designed to work in the general case, it is advised that you customize or even use the native SDK if you have very specific needs not provided such as real-time performance-critical work.
+
 ## Setup
 
 To add an additional plugin, modify your podfile. Simply install the `navisenscore` plugin, and then add any other plugins
